@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>I Love You Button</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ffe6f0;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      background: #ff4d6d;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      background: #e6004c;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 2rem;
+      animation: floatUp 3s ease forwards;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-200px);
+        opacity: 0;
+      }
+    }
+
+    .love-text {
+      margin-top: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #ff1a4d;
+      opacity: 0;
+      animation: fadeInOut 2s ease forwards;
+    }
+
+    @keyframes fadeInOut {
+      0% { opacity: 0; }
+      30% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button id="loveBtn">Click Me 💖</button>
+    <div id="loveArea"></div>
+  </div>
+
+<script>
+  const button = document.getElementById("loveBtn");
+  const area = document.getElementById("loveArea");
+
+  const heartEmojis = ["❤️", "💕", "💓", "💗", "💖", "💞", "💘", "💝"];
+
+  button.addEventListener("click", () => {
+    // Create random heart
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.top = (window.innerHeight - 100) + "px";
+    document.body.appendChild(heart);
+
+    // Remove heart after animation
+    setTimeout(() => {
+      heart.remove();
+    }, 3000);
+
+    // Add "I love you, mi babi!!!" text
+    const loveText = document.createElement("div");
+    loveText.className = "love-text";
+    loveText.textContent = "I love you, mi babi!!! ❤️";
+    area.appendChild(loveText);
+
+    // Remove text after animation
+    setTimeout(() => {
+      loveText.remove();
+    }, 2000);
+  });
+</script>
+
+</body>
+</html>
